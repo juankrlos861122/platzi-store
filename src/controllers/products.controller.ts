@@ -9,6 +9,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ProductsService } from '../services/products.service';
+import { CreateProductDto, UpdateProductDto } from '../dto/products.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -32,17 +33,16 @@ export class ProductsController {
 
   @Get(':id')
   getProductId(@Param('id') id: string) {
-    //return { message: `Product ${id}` };
     return this.productService.findOne(id);
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateProductDto) {
     return this.productService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
+  update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
     return this.productService.update(id, payload);
   }
 
